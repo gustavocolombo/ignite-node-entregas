@@ -14,7 +14,7 @@ export default class CreateDeliveryUseCase {
     const delivery = await prisma.deliveries.create({
       data: {
         item_name,
-        fk_clients_id,
+        fk_clients_id
       },
     });
 
