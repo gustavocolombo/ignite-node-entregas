@@ -13,34 +13,32 @@ export default class AuthenticateDeliverymanUseCase {
     username,
     password,
   }: Prisma.DeliverymanWhereInput): Promise<ICreateTokenDeliveryman> {
-    const deliverymanExists = await prisma.deliveryman.findFirst({
+    const deliveryman = await prisma.deliveryman.findUnique({
       where: {
-        username: {
-          mode: "insensitive",
-        },
+        username,
       },
     });
 
-    if (!deliverymanExists)
+    if (!deliveryman)
       throw new Error("Combinação username/senha inválidos");
 
-    const comparePass = await compare(password, deliverymanExists.password);
+    const comparePass = await compare(password, deliveryman.password);
 
-    if (!deliverymanExists)
+    if (!deliveryman)
       throw new Error("Combinação username/senha inválidos");
 
     const token = sign(
       {
-        id: deliverymanExists.id,
-        username: deliverymanExists.username,
+        id: deliveryman.id,
+        username: deliveryman.username,
       },
       "d7a9d971995e4128f1c688659bd817e7",
       {
         expiresIn: "1d",
-        subject: deliverymanExists.id,
+        subject: deliveryman.id,
       }
     );
 
-    return { deliverymanExists, token };
+    return { token, deliveryman };
   }
 }

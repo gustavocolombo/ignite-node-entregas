@@ -7,11 +7,9 @@ export default class CreateClientUseCase {
     username,
     password,
   }: Prisma.ClientsCreateInput): Promise<Clients> {
-    const clientExists = await prisma.clients.findFirst({
+    const clientExists = await prisma.clients.findUnique({
       where: {
-        username: {
-          mode: "insensitive",
-        },
+        username,
       },
     });
 

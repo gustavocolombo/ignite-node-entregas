@@ -7,11 +7,9 @@ export default class CreateDeliverymanUseCase {
     username,
     password,
   }: Prisma.DeliverymanCreateInput): Promise<Deliveryman> {
-    const deliverymanExist = await prisma.deliveryman.findFirst({
+    const deliverymanExist = await prisma.deliveryman.findUnique({
       where: {
-        username: {
-          mode: "insensitive",
-        },
+        username
       },
     });
 

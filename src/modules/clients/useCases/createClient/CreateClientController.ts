@@ -8,7 +8,7 @@ export default class CreateClientController {
 
     const service = new CreateClientUseCase();
 
-    const client = service.execute({ username, password });
+    const client = await service.execute({ username, password });
 
     return response.json(client);
   }
