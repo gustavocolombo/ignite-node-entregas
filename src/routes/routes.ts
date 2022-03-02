@@ -4,6 +4,7 @@ import ensureAuthenticatedDeliveryman from "../middlewares/ensureAuthenticatedDe
 import AuthenticateClientController from "../modules/authenticate/useCases/authenticateClient/AuthenticateClientController";
 import AuthenticateDeliverymanController from "../modules/authenticate/useCases/authenticateDeliveryman/AuthenticateDeliverymanController";
 import CreateClientController from "../modules/clients/useCases/createClient/CreateClientController";
+import FindAllDeliveriesController from "../modules/clients/useCases/findAllDeliveries/FindAllDeliveriesController";
 import CreateDeliveryController from "../modules/deliveries/useCases/createDelivery/CreateDeliveryController";
 import FindAllDeliveriesAvailableController from "../modules/deliveries/useCases/findAllDeliveriesAvailable/FindAllDeliveriesController";
 import UpdateDeliveryController from "../modules/deliveries/useCases/updateDelivery/UpdateDeliveryController";
@@ -35,6 +36,11 @@ routes.put(
   "/v1/deliveries/patch/:id",
   ensureAuthenticatedDeliveryman,
   new UpdateDeliveryController().handle
+);
+routes.get(
+  "/v1/clients/all-deliveries",
+  ensureAuthenticatedClient,
+  new FindAllDeliveriesController().handle
 );
 
 export default routes;
