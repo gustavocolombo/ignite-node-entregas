@@ -9,6 +9,7 @@ import CreateDeliveryController from "../modules/deliveries/useCases/createDeliv
 import FindAllDeliveriesAvailableController from "../modules/deliveries/useCases/findAllDeliveriesAvailable/FindAllDeliveriesController";
 import UpdateDeliveryController from "../modules/deliveries/useCases/updateDelivery/UpdateDeliveryController";
 import CreateDeliverymanController from "../modules/deliveryman/useCases/createDeliveryman/CreateDeliveryController";
+import FindAllDeliveriesDeliverymanController from "../modules/deliveryman/useCases/findAllDeliveries/FindAllDeliveriesDeliverymanController";
 
 const routes = Router();
 
@@ -41,6 +42,11 @@ routes.get(
   "/v1/clients/all-deliveries",
   ensureAuthenticatedClient,
   new FindAllDeliveriesController().handle
+);
+routes.get(
+  "/v1/deliveryman/all-deliveries",
+  ensureAuthenticatedDeliveryman,
+  new FindAllDeliveriesDeliverymanController().handle
 );
 
 export default routes;
