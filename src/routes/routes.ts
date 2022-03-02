@@ -8,6 +8,7 @@ import FindAllDeliveriesController from "../modules/clients/useCases/findAllDeli
 import CreateDeliveryController from "../modules/deliveries/useCases/createDelivery/CreateDeliveryController";
 import FindAllDeliveriesAvailableController from "../modules/deliveries/useCases/findAllDeliveriesAvailable/FindAllDeliveriesController";
 import UpdateDeliveryController from "../modules/deliveries/useCases/updateDelivery/UpdateDeliveryController";
+import UpdateEndDateController from "../modules/deliveries/useCases/updateEndDateDelivery/UpdateEndDateController";
 import CreateDeliverymanController from "../modules/deliveryman/useCases/createDeliveryman/CreateDeliveryController";
 import FindAllDeliveriesDeliverymanController from "../modules/deliveryman/useCases/findAllDeliveries/FindAllDeliveriesDeliverymanController";
 
@@ -47,6 +48,11 @@ routes.get(
   "/v1/deliveryman/all-deliveries",
   ensureAuthenticatedDeliveryman,
   new FindAllDeliveriesDeliverymanController().handle
+);
+routes.put(
+  "/v1/deliveries/update-date/:id",
+  ensureAuthenticatedDeliveryman,
+  new UpdateEndDateController().handle
 );
 
 export default routes;
